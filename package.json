@@ -1,0 +1,18 @@
+{
+  "name": "mixpanel-nomenclature",
+  "version": "1.0.0",
+  "description": "Responsible for: - Parsing a spec file, translate to Joi - Validate that property name strictly matches - Creating documentation page from schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "clear && tape test/* | tap-spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "joi": "^6.5.0"
+  },
+  "devDependencies": {
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.1"
+  }
+}
