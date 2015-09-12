@@ -1,0 +1,25 @@
+{
+  "events": {
+    "Video start": {
+      "show": {
+        "datatype": "string",
+        "description": "The show name the current video belongs to",
+        "samples": ["Days of our Lives", "The Blacklist"]
+      }
+    }
+  },
+  "superProperties": {
+    "Gender": {
+      "datatype": "string",
+      "description": "The gender of the current user",
+      "samples": ["Female", "Male"]
+    }
+  },
+  "people": {
+    "plan": {
+      "datatype": "string",
+      "description": "The type of plan the current user subscribed to",
+      "samples": ["Free", "Premium"]
+    }
+  }
+}
