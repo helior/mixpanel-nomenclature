@@ -4,7 +4,7 @@
   "description": "Responsible for: - Parsing a spec file, translate to Joi - Validate that property name strictly matches - Creating documentation page from schema",
   "main": "index.js",
   "scripts": {
-    "test": "clear && tape test/* | tap-spec"
+    "test": "clear && tape test/* | tap-dot"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,10 @@
     "joi": "^6.5.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-run": "^1.6.8",
+    "tap-dot": "^1.0.0",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.1"
   }
