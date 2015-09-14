@@ -4,5 +4,9 @@ module.exports = {
     obj[name] = properties;
     console.log('original track');
     return obj;
+  },
+
+  otherThing: function (name) {
+    console.log("I do another thing: " + name);
   }
 };
