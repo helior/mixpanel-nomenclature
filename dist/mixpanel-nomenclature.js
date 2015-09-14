@@ -9,6 +9,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var Nomenclature = require('./nomenclature');
+var Joi = require('joi');
 
 var MixpanelNomenclature = (function (_Nomenclature) {
   _inherits(MixpanelNomenclature, _Nomenclature);
@@ -20,9 +21,19 @@ var MixpanelNomenclature = (function (_Nomenclature) {
   }
 
   _createClass(MixpanelNomenclature, [{
+    key: 'eventPath',
+    value: function eventPath(eventName) {
+      return ['events', eventName].join('.');
+    }
+  }, {
     key: 'eventExists',
     value: function eventExists(eventName) {
-      return this.specDefinitionExists(['events', eventName].join('.'));
+      return this.specDefinitionExists(this.eventPath(eventName));
+    }
+  }, {
+    key: 'getEventSpec',
+    value: function getEventSpec(eventName) {
+      return this.getSpecItem(this.eventPath(eventName));
     }
   }, {
     key: 'process',
@@ -32,8 +43,14 @@ var MixpanelNomenclature = (function (_Nomenclature) {
       this.override('track', this.validate(function (event_name, properties, callback) {
         // Validate the events and property names; return boolean.
         if (_this.eventExists(event_name)) {
-          console.log('running "track" before');
-          return true;
+          Joi.validate(properties, _this.getEventSpec(event_name), function (err, value) {
+            if (err) {
+              console.log('Validation failed for event "' + event_name + '": ' + err.details[0].message + ', however "' + err.details[0].context.value + '" given.');
+              return false;
+            }
+            console.log('running "track" before');
+            return true;
+          });
         }
 
         return false;
