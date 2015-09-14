@@ -1,1 +1,1 @@
-module.exports = require('./dist/nomenclature');
+module.exports = require('./dist/main');
