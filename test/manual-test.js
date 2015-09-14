@@ -4,4 +4,4 @@ var nomenclature = require('..');
 
 nomenclature(mixpanel, spec);
 
-mixpanel.track('somekey', 'somevalue');
+mixpanel.track('Arrived to end of page', 'somevalue');

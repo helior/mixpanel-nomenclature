@@ -19,8 +19,8 @@ var Nomenclature = (function () {
 
   _createClass(Nomenclature, [{
     key: 'override',
-    value: function override(object, methodName, callback) {
-      object[methodName] = callback(object[methodName]);
+    value: function override(methodName, callback) {
+      this.api[methodName] = callback(this.api[methodName]);
     }
   }, {
     key: 'validate',

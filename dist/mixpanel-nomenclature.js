@@ -29,7 +29,7 @@ var MixpanelNomenclature = (function (_Nomenclature) {
     value: function process() {
       var _this = this;
 
-      this.override(this.api, 'track', this.validate(function (event_name, properties, callback) {
+      this.override('track', this.validate(function (event_name, properties, callback) {
         // Validate the events and property names; return boolean.
         if (_this.eventExists(event_name)) {
           console.log('running "track" before');
