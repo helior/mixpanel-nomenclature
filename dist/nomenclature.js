@@ -1,60 +1,70 @@
 'use strict';
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 var specDefault = { 'events': {}, 'superProperties': {}, 'peopleProperties': {} };
+var has = require('lodash/object/has');
 
-module.exports = function (api) {
-  var spec = arguments.length <= 1 || arguments[1] === undefined ? specDefault : arguments[1];
+var Nomenclature = (function () {
+  function Nomenclature(api, loadedSpec) {
+    _classCallCheck(this, Nomenclature);
 
-  var loadedSpec;
-
-  /**
-   *
-   */
-  function override(object, methodName, callback) {
-    object[methodName] = callback(object[methodName]);
+    if (Nomenclature.validateSpec(loadedSpec)) {
+      this.spec = loadedSpec;
+      this.api = api;
+    }
   }
 
-  /**
-   *
-   */
-  function validate(extraBehavior) {
-    return function (original) {
-      return function () {
-        if (extraBehavior.apply(this, arguments)) {
-          return original.apply(this, arguments);
-        }
+  _createClass(Nomenclature, [{
+    key: 'override',
+    value: function override(object, methodName, callback) {
+      object[methodName] = callback(object[methodName]);
+    }
+  }, {
+    key: 'validate',
+    value: function validate(extraBehavior) {
+      return function (original) {
+        return function () {
+          if (extraBehavior.apply(this, arguments)) {
+            return original.apply(this, arguments);
+          }
+        };
       };
-    };
-  }
+    }
+  }, {
+    key: 'specDefinitionExists',
+    value: function specDefinitionExists(path) {
+      return has(this.spec, path);
+    }
+  }, {
+    key: 'process',
+    value: function process() {}
+  }, {
+    key: 'spec',
+    get: function get() {
+      return this._spec;
+    },
+    set: function set(value) {
+      this._spec = value;
+    }
+  }, {
+    key: 'api',
+    get: function get() {
+      return this._api;
+    },
+    set: function set(value) {
+      this._api = value;
+    }
+  }], [{
+    key: 'validateSpec',
+    value: function validateSpec(spec) {
+      return typeof spec == 'object';
+    }
+  }]);
 
-  /**
-   * @TODO
-   */
-  function validateSpec(spec) {
-    return spec;
-  }
+  return Nomenclature;
+})();
 
-  /**
-   * @TODO
-   */
-  function eventExists() {
-    return true;
-  }
-
-  /**
-   *
-   */
-  function initialize(api, spec) {
-    // Validate spec
-    loadedSpec = validateSpec(spec);
-
-    // Override track method.
-    override(api, 'track', validate(function (event_name, properties, callback) {
-      // Validate the events and property names; return boolean.
-      if (eventExists()) console.log('running before');
-      return true;
-    }));
-  }
-
-  initialize(api, spec);
-};
+module.exports = Nomenclature;
