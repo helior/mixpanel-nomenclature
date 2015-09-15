@@ -40,8 +40,7 @@ var MixpanelNomenclature = (function (_Nomenclature) {
     value: function process() {
       var _this = this;
 
-      this.override('track', this.validate(function (event_name, properties, callback) {
-        // Validate the events and property names; return boolean.
+      this.override('track', this.validate(function (original, event_name, properties) {
         if (_this.eventExists(event_name)) {
           Joi.validate(properties, _this.getEventSpec(event_name), function (err, value) {
             if (err) {
@@ -49,11 +48,11 @@ var MixpanelNomenclature = (function (_Nomenclature) {
               return false;
             }
             console.log('running "track" before');
-            return true;
+            original();
           });
+        } else {
+          console.log('Event "' + event_name + '" does not exist!');
         }
-
-        return false;
       }));
     }
   }]);

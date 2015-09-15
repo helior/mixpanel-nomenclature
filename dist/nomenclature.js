@@ -1,5 +1,7 @@
 'use strict';
 
+var _slice = Array.prototype.slice;
+
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
@@ -7,7 +9,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var specDefault = { 'events': {}, 'superProperties': {}, 'peopleProperties': {} };
 var has = require('lodash/object/has');
 var get = require('lodash/object/get');
-var Joi = require('joi');
 
 var Nomenclature = (function () {
   /**
@@ -54,9 +55,12 @@ var Nomenclature = (function () {
     value: function validate(extraBehavior) {
       return function (original) {
         return function () {
-          if (extraBehavior.apply(this, arguments)) {
-            return original.apply(this, arguments);
-          }
+          var _this = this,
+              _arguments = arguments;
+
+          extraBehavior.call.apply(extraBehavior, [this, function () {
+            original.apply(_this, _arguments);
+          }].concat(_slice.call(arguments)));
         };
       };
     }
