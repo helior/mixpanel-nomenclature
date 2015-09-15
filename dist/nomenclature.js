@@ -6,7 +6,6 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var specDefault = { 'events': {}, 'superProperties': {}, 'peopleProperties': {} };
 var has = require('lodash/object/has');
 var get = require('lodash/object/get');
 
@@ -61,6 +60,23 @@ var Nomenclature = (function () {
           extraBehavior.call.apply(extraBehavior, [this, function () {
             original.apply(_this, _arguments);
           }].concat(_slice.call(arguments)));
+        };
+      };
+    }
+  }, {
+    key: 'validateSync',
+
+    /**
+     * [validateSync description]
+     * @param  {[type]} extraBehavior [description]
+     * @return {[type]}               [description]
+     */
+    value: function validateSync(extraBehavior) {
+      return function (original) {
+        return function () {
+          if (extraBehavior.apply(this, arguments)) {
+            original.apply(this, arguments);
+          }
         };
       };
     }
