@@ -28,6 +28,8 @@ var Nomenclature = (function () {
     if (Nomenclature.validateSpec(loadedSpec)) {
       this.spec = loadedSpec;
       this.api = api;
+    } else {
+      console.log('The provided spec does not validate.');
     }
   }
 

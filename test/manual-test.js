@@ -1,6 +1,6 @@
-var spec = require('./spec.js');
 var mixpanel = require('./mock-mixpanel.js');
 var nomenclature = require('..');
+var spec = require('./spec.js');
 
 nomenclature(mixpanel, spec);
 

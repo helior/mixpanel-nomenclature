@@ -1,23 +1,19 @@
-## Nomenclature
-
-Responsible for:
-- Parsing a spec file, translate to Joi
-- Validate that property name strictly matches
-- Creating documentation page from schema
-
-## Nomenclature Mixpanel
+## Mixpanel Nomenclature
+Mixpanel nomenclature wraps around the existing Mixpanel library and uses a spec (which you provide) to validate that a tracking call is valid before sending off to Mixpanel. This will ensure the integrity of your data.
 
 Responsible for:
 - Mixpanel-specific schema
 - proxy mixpanel object to inject validation/conversion
 
 
-## New notes
-- parses a spec file and holds in memory
-- monkey patches Mixpanel (before)
-- Checks whether a track call is valid before calling Mixpanel.track
-- If fails validation, log something.
-
-
-## problems
-- spec file should contain documentation notes, but should reduce to a simple object for production.
+###### TODOS:
+- handle exceptions/logging properly
+- write some tests
+- document methods
+- validate mixpanel spec
+- override register method
+- override register_once method
+- override people.set method
+- override people.set_once method
+- override track_links method
+- override track_forms method
