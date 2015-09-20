@@ -25,15 +25,60 @@ var Nomenclature = (function () {
   function Nomenclature(api, loadedSpec) {
     _classCallCheck(this, Nomenclature);
 
-    if (Nomenclature.validateSpec(loadedSpec)) {
-      this.spec = loadedSpec;
-      this.api = api;
-    } else {
-      console.log('The provided spec does not validate.');
-    }
+    this.validateSpec(loadedSpec);
+
+    this.api = api;
+    this.spec = loadedSpec;
   }
 
   _createClass(Nomenclature, [{
+    key: 'validateSpec',
+
+    // /**
+    //  * Getter for property: spec.
+    //  *
+    //  * @return {object} Spec object.
+    //  */
+    // get spec() {
+    //     return this._spec;
+    // }
+    //
+    // /**
+    //  * Setter for property: spec.
+    //  */
+    // set spec(value) {
+    //   this._spec = value;
+    // }
+    //
+    // /**
+    //  * Getter for property: api
+    //  *
+    //  * @return {object} Analytics API object.
+    //  */
+    // get api() {
+    //   return this._api;
+    // }
+    //
+    // /**
+    //  * Setter for property: api.
+    //  *
+    //  * @param  {object} value The Analytics library used to override.
+    //  */
+    // set api(value) {
+    //   this._api = value;
+    // }
+
+    /**
+     * [validateSpec description]
+     * @param  {[type]} spec [description]
+     * @return {[type]}      [description]
+     */
+    value: function validateSpec(spec) {
+      if (typeof spec !== 'object') {
+        throw new Error('The provided spec must be an object.');
+      }
+    }
+  }, {
     key: 'override',
 
     /**
@@ -82,85 +127,36 @@ var Nomenclature = (function () {
         };
       };
     }
-  }, {
-    key: 'specDefinitionExists',
 
     /**
      * [specDefinitionExists description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
      */
+  }, {
+    key: 'specDefinitionExists',
     value: function specDefinitionExists(path) {
       return has(this.spec, path);
     }
-  }, {
-    key: 'getSpecItem',
 
     /**
      * [getSpecItem description]
      * @param  {[type]} path [description]
      * @return {[type]}      [description]
      */
+  }, {
+    key: 'getSpecItem',
     value: function getSpecItem(path) {
       return get(this.spec, path);
     }
-  }, {
-    key: 'process',
 
     /**
      * [process description]
      * @return {[type]} [description]
      */
+  }, {
+    key: 'process',
     value: function process() {}
-  }, {
-    key: 'spec',
-
-    /**
-     * Getter for property: spec.
-     *
-     * @return {object} Spec object.
-     */
-    get: function get() {
-      return this._spec;
-    },
-
-    /**
-     * Setter for property: spec.
-     */
-    set: function set(value) {
-      this._spec = value;
-    }
-  }, {
-    key: 'api',
-
-    /**
-     * Getter for property: api
-     *
-     * @return {object} Analytics API object.
-     */
-    get: function get() {
-      return this._api;
-    },
-
-    /**
-     * Setter for property: api.
-     *
-     * @param  {object} value The Analytics library used to override.
-     */
-    set: function set(value) {
-      this._api = value;
-    }
-  }], [{
-    key: 'validateSpec',
-
-    /**
-     * [validateSpec description]
-     * @param  {[type]} spec [description]
-     * @return {[type]}      [description]
-     */
-    value: function validateSpec(spec) {
-      return typeof spec == 'object';
-    }
   }]);
 
   return Nomenclature;
