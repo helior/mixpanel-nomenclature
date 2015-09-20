@@ -6,7 +6,11 @@
   "scripts": {
     "test": "clear && tape test/* | tap-dot"
   },
-  "author": "",
+  "author": "Helior Colorado",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/helior/mixpanel-nomenclature.git"
+  },
   "license": "ISC",
   "dependencies": {
     "joi": "^6.5.0",
