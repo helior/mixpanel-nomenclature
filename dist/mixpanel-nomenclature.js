@@ -6,10 +6,13 @@ var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_ag
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var specDefault = { 'events': {}, 'superProperties': {}, 'peopleProperties': {} };
 var Nomenclature = require('./nomenclature');
+var has = require('lodash/object/has');
+var forOwn = require('lodash/object/forOwn');
+var forEach = require('lodash/collection/forEach');
 var Joi = require('joi');
 
 var MixpanelNomenclature = (function (_Nomenclature) {
@@ -35,6 +38,23 @@ var MixpanelNomenclature = (function (_Nomenclature) {
     key: 'getEventSpec',
     value: function getEventSpec(eventName) {
       return this.getSpecItem(this.eventPath(eventName));
+    }
+  }, {
+    key: 'validateSpec',
+    value: function validateSpec(spec) {
+      // Let parent class do its validation first.
+      _get(Object.getPrototypeOf(MixpanelNomenclature.prototype), 'validateSpec', this).call(this, spec);
+
+      // Validate that each root-level key exists and is an object.
+      ['events', 'superProperties', 'peopleProperties'].forEach(function (type) {
+        if (!has(spec, type)) throw new Error('"' + type + '" key must exist in the spec.');
+        if (typeof spec[type] !== 'object') throw new Error('The value of "' + type + '" must be an object; "' + typeof spec[type] + '" was found instead.');
+      });
+
+      // Additionally, each event should be an object as well.
+      forOwn(spec['events'], function (val, key) {
+        if (typeof val !== 'object') throw new Error('The event "' + key + '" must be an object of properties; "' + typeof val + '" was found instead.');
+      });
     }
   }, {
     key: 'process',
