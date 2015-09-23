@@ -9,4 +9,4 @@ gulp.task('default', function () {
     .pipe(run('npm test'));
 });
 
-gulp.watch(['lib/*.js', 'test/test.js'], ['default']);
+gulp.watch(['lib/*.js', 'test/*.js'], ['default']);
