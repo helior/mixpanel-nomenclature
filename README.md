@@ -10,10 +10,10 @@ Responsible for:
 - handle exceptions/logging properly
 - write some tests
 - document methods
-- validate mixpanel spec
 - override register method
 - override register_once method
 - override people.set method
 - override people.set_once method
 - override track_links method
 - override track_forms method
+- generate docs from spec?

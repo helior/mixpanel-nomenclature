@@ -27,46 +27,12 @@ var Nomenclature = (function () {
 
     this.validateSpec(loadedSpec);
 
-    this.api = api;
-    this.spec = loadedSpec;
+    this._api = api;
+    this._spec = loadedSpec;
   }
 
   _createClass(Nomenclature, [{
     key: 'validateSpec',
-
-    // /**
-    //  * Getter for property: spec.
-    //  *
-    //  * @return {object} Spec object.
-    //  */
-    // get spec() {
-    //     return this._spec;
-    // }
-    //
-    // /**
-    //  * Setter for property: spec.
-    //  */
-    // set spec(value) {
-    //   this._spec = value;
-    // }
-    //
-    // /**
-    //  * Getter for property: api
-    //  *
-    //  * @return {object} Analytics API object.
-    //  */
-    // get api() {
-    //   return this._api;
-    // }
-    //
-    // /**
-    //  * Setter for property: api.
-    //  *
-    //  * @param  {object} value The Analytics library used to override.
-    //  */
-    // set api(value) {
-    //   this._api = value;
-    // }
 
     /**
      * [validateSpec description]
@@ -157,6 +123,48 @@ var Nomenclature = (function () {
   }, {
     key: 'process',
     value: function process() {}
+  }, {
+    key: 'spec',
+
+    /**
+     * Getter for property: spec.
+     *
+     * @return {object} Spec object.
+     */
+    get: function get() {
+      return this._spec;
+    },
+
+    /**
+     * Setter for property: spec.
+     */
+    set: function set(value) {
+      if (value) {
+        this._spec = value;
+      }
+    }
+
+    /**
+     * Getter for property: api
+     *
+     * @return {object} Analytics API object.
+     */
+  }, {
+    key: 'api',
+    get: function get() {
+      return this._api;
+    },
+
+    /**
+     * Setter for property: api.
+     *
+     * @param  {object} value The Analytics library used to override.
+     */
+    set: function set(value) {
+      if (value) {
+        this._api = value;
+      }
+    }
   }]);
 
   return Nomenclature;
