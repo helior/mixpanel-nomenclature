@@ -5,8 +5,8 @@ var run = require('gulp-run');
 gulp.task('default', function () {
   return gulp.src("lib/*.js")
     .pipe(babel())
-    .pipe(gulp.dest("dist"));
-    // .pipe(run('npm test'));
+    .pipe(gulp.dest("dist"))
+    .pipe(run('npm test'));
 });
 
-gulp.watch(['lib/*.js'], ['default']);
+gulp.watch(['lib/*.js', 'test/test.js'], ['default']);
