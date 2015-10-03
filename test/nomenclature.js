@@ -2,7 +2,6 @@ var test = require('tape');
 var spec = require('./spec.js');
 var mixpanelApi = require('./mock-mixpanel.js');
 var nomenclature = require('../dist/nomenclature');
-var MixpanelNomenclature = require('..');
 
 test('Nomenclature.constructor()', function (t) {
   t.throws(function () {new nomenclature(mixpanelApi, null)});
@@ -21,7 +20,6 @@ test('Nomenclature.get', function (t) {
 });
 
 test('Nomenclature.validateSpec()', function (t) {
-  var spec = null;
   var instance = new nomenclature(mixpanelApi, {});
 
   t.throws(function () {instance.validateSpec(null)});
@@ -49,5 +47,5 @@ test('Nomenclature.getSpecItem()', function (t) {
   t.equal(instance.getSpecItem('fakeProperty'), undefined, 'fakeProperty should be undefined');
   t.end();
 
-
+  // TODO: override(), overrideAndValidate(), validate(), validateSync()
 });
