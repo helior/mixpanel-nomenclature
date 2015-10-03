@@ -4,7 +4,7 @@
   "description": "Responsible for: - Parsing a spec file, translate to Joi - Validate that property name strictly matches - Creating documentation page from schema",
   "main": "index.js",
   "scripts": {
-    "test": "clear && tape test/* | tap-spec"
+    "test": "gulp test"
   },
   "author": "Helior Colorado",
   "repository": {
