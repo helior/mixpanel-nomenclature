@@ -1,6 +1,6 @@
 {
   "name": "mixpanel-nomenclature",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Responsible for: - Parsing a spec file, translate to Joi - Validate that property name strictly matches - Creating documentation page from schema",
   "main": "index.js",
   "scripts": {
